@@ -4,7 +4,7 @@ class Produto:
     valor = 0.00
     tipoSetor = ''
 
-    def __int__(self, id, descricao, valor, tipoSetor):
+    def __init__(self, id, descricao, valor, tipoSetor):
         self.id = id
         self.descricao = descricao
         self.valor = valor

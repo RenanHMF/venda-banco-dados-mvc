@@ -2,7 +2,7 @@ from Model.Produto import Produto
 from Model.ProdutoDAO import ProdutoDAO
 
 class ProdutoController:
-    def __int__(self):
+    def __init__(self):
         self.pDAO = ProdutoDAO()
         self.produto = None
 
@@ -17,9 +17,9 @@ class ProdutoController:
     def atualizar(self, id, descricao, valor, tipoSetor):
         if not self.produto.getId() == int(id):
             return False
-        self.produto.setDescricao(int(descricao))
-        self.produto.setValor(int(valor))
-        self.produto.setTipoSetor(int(tipoSetor))
+        self.produto.setDescricao(descricao)
+        self.produto.setValor(float(valor))
+        self.produto.setTipoSetor(tipoSetor)
         return self.pDAO.atualizar(self.produto)
 
     def consultar(self, id):

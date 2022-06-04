@@ -32,7 +32,7 @@ class ProdutoDAO:
         return False
 
     def consultar(self, id):
-        sql = 'SELECT * FROM PRODUTO WHERE ID =' + str(id)
+        sql = 'SELECT * FROM PRODUTO WHERE ID_PRODUTO =' + str(id)
         if not self.conectar():
             return False
         self.cursor.execute(sql)
@@ -42,8 +42,8 @@ class ProdutoDAO:
         return None
 
     def atualizar(self, p):
-        sql = 'UPDATE PRODUTO SET DESCRICAO=%s, VALOR=%s, TIPOSETOR=%s'
-        valores = (p.getDescricao(), p.getValor(), p.getTipoSetor())
+        sql = 'UPDATE PRODUTO SET DESCRICAO=%s, VALOR=%s, TIPOSETOR=%s WHERE ID_PRODUTO=%s'
+        valores = (p.getDescricao(), p.getValor(), p.getTipoSetor(), p.getId())
         if not self.conectar():
             return False
         self.cursor.execute(sql, valores)
@@ -53,7 +53,7 @@ class ProdutoDAO:
         return False
 
     def excluir(self, id):
-        sql = 'DELETE FROM PRODUTO WHERE ID =' + str(id)
+        sql = 'DELETE FROM PRODUTO WHERE ID_PRODUTO =' + str(id)
         if not self.conectar():
             return False
         self.cursor.execute(sql)

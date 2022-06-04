@@ -1,11 +1,12 @@
-class Cliente:
+class Cliente :
     id = 0
     nome = ''
     endereco = ''
     telefone = ''
     cpf = ''
 
-    def __int__(self, id, nome, endereco, telefone, cpf):
+
+    def __init__(self, id, nome, endereco, telefone, cpf):
         self.id = id
         self.nome = nome
         self.endereco = endereco

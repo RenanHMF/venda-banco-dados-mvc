@@ -2,7 +2,7 @@ from Model.Cliente import Cliente
 from Model.ClienteDAO import ClienteDao
 
 class ClienteController:
-    def __int__(self):
+    def __init__(self):
         self.cDAO = ClienteDao()
         self.cliente = None
 
@@ -17,10 +17,10 @@ class ClienteController:
     def atualizar(self, id, nome, endereco, telefone, cpf):
         if not self.cliente.getId() == int(id):
             return False
-        self.cliente.setNome(int(nome))
-        self.cliente.setEndereco(int(endereco))
-        self.cliente.setTelefone(int(telefone))
-        self.cliente.setCpf(int(cpf))
+        self.cliente.setNome(nome)
+        self.cliente.setEndereco(endereco)
+        self.cliente.setTelefone(telefone)
+        self.cliente.setCpf(cpf)
         return self.cDAO.atualizar(self.cliente)
 
     def consultar(self, id):
@@ -29,9 +29,9 @@ class ClienteController:
         if self.cliente != None:
             dados = [str(self.cliente.getId()),
                      self.cliente.getNome(),
-                     str(self.cliente.getEndereco()),
-                     str(self.cliente.getTelefone()),
-                     str(self.cliente.getCpf())]
+                     self.cliente.getEndereco(),
+                     self.cliente.getTelefone(),
+                     self.cliente.getCpf()]
             return dados
         return None
 

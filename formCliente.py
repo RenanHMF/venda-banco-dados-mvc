@@ -76,6 +76,9 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         self.btnConsultar.clicked.connect(self.consultar)
+        self.btnCadastrar.clicked.connect(self.cadastrar)
+        self.btnAtualizar.clicked.connect(self.atualizar)
+        self.btnExcluir.clicked.connect(self.excluir)
 
     def consultar(self):
         dados = self.clienteController.consultar(int(self.edtId.text()))
@@ -84,6 +87,8 @@ class Ui_MainWindow(object):
             self.edtEndereco.setText(dados[2])
             self.edtCpf.setText(dados[3])
             self.edtTelefone.setText(dados[4])
+            self.btnCadastrar.setEnabled(False)
+            self.btnAtualizar.setEnabled(True)
             print("Consultado valores!")
         else:
             self.edtNome.setText('')
@@ -91,6 +96,52 @@ class Ui_MainWindow(object):
             self.edtCpf.setText('')
             self.edtTelefone.setText('')
             print("Não foi possivel consultar!")
+
+    def cadastrar(self):
+        if self.clienteController.cadastrar(int(self.edtId.text()),
+                                         self.edtNome.text(),
+                                         self.edtEndereco.text(),
+                                         self.edtCpf.text(),
+                                         self.edtTelefone.text()):
+            print('Cliente cadastrado!')
+            self.edtId.setText('')
+            self.edtNome.setText('')
+            self.edtEndereco.setText('')
+            self.edtCpf.setText('')
+            self.edtTelefone.setText('')
+
+        else:
+            self.edtId.setText('')
+            print('Erro ao cadastrar Cliente!')
+
+    def atualizar(self):
+        if self.clienteController.atualizar(str(self.edtId.text()),
+                                            self.edtNome.text(),
+                                            self.edtEndereco.text(),
+                                            self.edtCpf.text(),
+                                            self.edtTelefone.text()):
+            print('Cliente atualizado!')
+
+            self.edtId.setText('')
+            self.edtNome.setText('')
+            self.edtEndereco.setText('')
+            self.edtCpf.setText('')
+            self.edtTelefone.setText('')
+            self.btnCadastrar.setEnabled(True)
+        else:
+            print('Erro ao atualizar Cliente!')
+
+    def excluir(self):
+        if self.clienteController.excluir(self.edtId.text()):
+            print('Cliente excluído!')
+            self.edtId.setText('')
+            self.edtNome.setText('')
+            self.edtEndereco.setText('')
+            self.edtCpf.setText('')
+            self.edtTelefone.setText('')
+            self.btnCadastrar.setEnabled(True)
+        else:
+            print('Erro ao excluir Cliente!')
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

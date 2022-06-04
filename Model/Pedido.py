@@ -6,7 +6,7 @@ class Pedido:
     id_produto = 0
     id_cliente = 0
 
-    def __int__(self, id, data, quantidade, valorTotal, id_produto, id_cliente):
+    def __init__(self, id, data, quantidade, valorTotal, id_produto, id_cliente):
         self.id = id
         self.data = data
         self.quantidade = quantidade

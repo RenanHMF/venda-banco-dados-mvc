@@ -10,8 +10,13 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from Controller.ProdutoController import ProdutoController
 
 class Ui_MainWindow(object):
+
+    def __init__(self):
+        self.produtoController = ProdutoController()
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(541, 294)
@@ -64,6 +69,66 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.btnConsultar.clicked.connect(self.consultar)
+        self.btnCadastrar.clicked.connect(self.cadastrar)
+        self.btnAtualizar.clicked.connect(self.atualizar)
+        self.btnExcluir.clicked.connect(self.excluir)
+
+    def consultar(self):
+        dados = self.produtoController.consultar(int(self.edtId.text()))
+        if dados:
+            self.edtDescricao.setText(dados[1])
+            self.edtValor.setText(dados[2])
+            self.edtTipoSetor.setText(dados[3])
+            self.btnCadastrar.setEnabled(False)
+            self.btnAtualizar.setEnabled(True)
+            print("Consultado valores!")
+        else:
+            self.edtId.setText('')
+            self.edtDescricao.setText('')
+            self.edtValor.setText('')
+            self.edtTipoSetor.setText('')
+            print("Não foi possivel consultar!")
+
+    def cadastrar(self):
+        if self.produtoController.cadastrar(int(self.edtId.text()),
+                                         self.edtDescricao.text(),
+                                         float(self.edtValor.text()),
+                                         self.edtTipoSetor.text()):
+            print('Produto cadastrado!')
+            self.edtId.setText('')
+            self.edtDescricao.setText('')
+            self.edtValor.setText('')
+            self.edtTipoSetor.setText('')
+        else:
+            self.edtId.setText('')
+            print('Erro ao cadastrar Produto!')
+
+    def atualizar(self):
+        if self.produtoController.atualizar(str(self.edtId.text()),
+                                            self.edtDescricao.text(),
+                                            str(self.edtValor.text()),
+                                            self.edtTipoSetor.text()):
+            print('Produto atualizado!')
+
+            self.edtId.setText('')
+            self.edtDescricao.setText('')
+            self.edtValor.setText('')
+            self.edtTipoSetor.setText('')
+            self.btnCadastrar.setEnabled(True)
+        else:
+            print('Erro ao atualizar Produto!')
+
+    def excluir(self):
+        if self.produtoController.excluir(self.edtId.text()):
+            print('Produto excluído!')
+            self.edtId.setText('')
+            self.edtDescricao.setText('')
+            self.edtValor.setText('')
+            self.edtTipoSetor.setText('')
+            self.btnCadastrar.setEnabled(True)
+        else:
+            print('Erro ao excluir Produto!')
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

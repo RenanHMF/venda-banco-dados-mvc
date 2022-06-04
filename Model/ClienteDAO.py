@@ -31,19 +31,19 @@ class ClienteDao:
             return True
         return False
 
-    def consultar(self, id_cliente):
-        sql = 'SELECT * FROM CLIENTE WHERE ID_CLIENTE = ' + str(id_cliente)
+    def consultar(self, id):
+        sql = 'SELECT * FROM CLIENTE WHERE ID_CLIENTE =' + str(id)
         if not self.conectar():
             return False
         self.cursor.execute(sql)
-        for (id_cliente, nome, endereco, telefone, cpf) in self.cursor:
-            c = Cliente(id_cliente, nome, endereco, telefone, cpf)
+        for (id, nome, endereco, telefone, cpf) in self.cursor:
+            c = Cliente(id, nome, endereco, telefone, cpf)
             return c
         return None
 
     def atualizar(self, c):
-        sql = 'UPDATE CLIENTE SET NOME=%s, ENDERECO=%s, TELEFONE=%s, CPF=%s'
-        valores = (c.getNome(), c.getEnderco(), c.getTelefone(), c.getCpf())
+        sql = 'UPDATE CLIENTE SET NOME=%s, ENDERECO=%s, TELEFONE=%s, CPF=%s WHERE ID_CLIENTE =%s'
+        valores = (c.getNome(), c.getEndereco(), c.getTelefone(), c.getCpf(), c.getId())
         if not self.conectar():
             return False
         self.cursor.execute(sql, valores)
@@ -53,7 +53,7 @@ class ClienteDao:
         return False
 
     def excluir(self, id):
-        sql = 'DELETE FROM CLIENTE WHERE ID =' + str(id)
+        sql = 'DELETE FROM CLIENTE WHERE ID_CLIENTE =' + str(id)
         if not self.conectar():
             return False
         self.cursor.execute(sql)
