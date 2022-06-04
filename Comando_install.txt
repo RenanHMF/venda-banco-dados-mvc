@@ -1,0 +1,6 @@
+pip install mysql-connector-python
+pip install PyQt5Designer
+pip install pyqt5-tools
+
+//front
+designer.exe
