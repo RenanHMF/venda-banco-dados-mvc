@@ -86,6 +86,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.edtValorTotal.setEnabled(False)
         self.btnConsultar.clicked.connect(self.consultar)
         self.btnCadastrar.clicked.connect(self.cadastrar)
         self.btnAtualizar.clicked.connect(self.atualizar)
@@ -100,6 +101,8 @@ class Ui_MainWindow(object):
             self.edtValorTotal.setText(dados[3])
             self.edtProduto.setText(dados[4])
             self.edtCliente.setText(dados[5])
+            self.edtProduto.setEnabled(False)
+            self.edtCliente.setEnabled(False)
             print("Consultado valores!")
         else:
             diaAtual = str(datetime.date.today())
@@ -109,6 +112,8 @@ class Ui_MainWindow(object):
             self.edtValorTotal.setText('')
             self.edtProduto.setText('')
             self.edtCliente.setText('')
+            self.edtProduto.setEnabled(True)
+            self.edtCliente.setEnabled(True)
             print("Não foi possivel consultar Pedido!")
 
     def cadastrar(self):
