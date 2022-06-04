@@ -115,7 +115,6 @@ class Ui_MainWindow(object):
         if self.pedidoController.cadastrar(int(self.edtId.text()),
                                            self.edtData.date().toPyDate(),
                                            int(self.edtQuantidade.text()),
-                                           float(self.edtValorTotal.text()),
                                            int(self.edtProduto.text()),
                                            int(self.edtCliente.text())):
             diaAtual = str(datetime.date.today())
