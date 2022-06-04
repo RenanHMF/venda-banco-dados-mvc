@@ -125,16 +125,6 @@
      <string>Quantidade</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="edtData">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>40</y>
-      <width>381</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
@@ -205,6 +195,43 @@
     </property>
     <property name="text">
      <string>Cliente</string>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="edtData">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>40</y>
+      <width>110</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="dateTime">
+     <datetime>
+      <hour>0</hour>
+      <minute>0</minute>
+      <second>0</second>
+      <year>2022</year>
+      <month>6</month>
+      <day>4</day>
+     </datetime>
+    </property>
+    <property name="minimumDateTime">
+     <datetime>
+      <hour>0</hour>
+      <minute>0</minute>
+      <second>0</second>
+      <year>2022</year>
+      <month>5</month>
+      <day>30</day>
+     </datetime>
+    </property>
+    <property name="minimumDate">
+     <date>
+      <year>2022</year>
+      <month>5</month>
+      <day>30</day>
+     </date>
     </property>
    </widget>
   </widget>

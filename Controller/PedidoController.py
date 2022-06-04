@@ -7,6 +7,7 @@ class PedidoController:
         self.pedido = None
 
     def cadastrar(self, id, data, quantidade, valorTotal, id_produto, id_cliente):
+
         pedido = Pedido(id, data, quantidade, valorTotal, id_produto, id_cliente)
 
         consulta = self.consultar(id)

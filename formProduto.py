@@ -80,8 +80,6 @@ class Ui_MainWindow(object):
             self.edtDescricao.setText(dados[1])
             self.edtValor.setText(dados[2])
             self.edtTipoSetor.setText(dados[3])
-            self.btnCadastrar.setEnabled(False)
-            self.btnAtualizar.setEnabled(True)
             print("Consultado valores!")
         else:
             self.edtId.setText('')
@@ -115,7 +113,6 @@ class Ui_MainWindow(object):
             self.edtDescricao.setText('')
             self.edtValor.setText('')
             self.edtTipoSetor.setText('')
-            self.btnCadastrar.setEnabled(True)
         else:
             print('Erro ao atualizar Produto!')
 
@@ -126,7 +123,6 @@ class Ui_MainWindow(object):
             self.edtDescricao.setText('')
             self.edtValor.setText('')
             self.edtTipoSetor.setText('')
-            self.btnCadastrar.setEnabled(True)
         else:
             print('Erro ao excluir Produto!')
 

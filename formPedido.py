@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import datetime
 
 from Controller.PedidoController import PedidoController
 
@@ -49,9 +50,6 @@ class Ui_MainWindow(object):
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(10, 70, 61, 16))
         self.label_3.setObjectName("label_3")
-        self.edtData = QtWidgets.QLineEdit(self.centralwidget)
-        self.edtData.setGeometry(QtCore.QRect(80, 40, 381, 20))
-        self.edtData.setObjectName("edtData")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(10, 40, 47, 13))
         self.label_2.setObjectName("label_2")
@@ -71,6 +69,12 @@ class Ui_MainWindow(object):
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(10, 160, 47, 13))
         self.label_6.setObjectName("label_6")
+        self.edtData = QtWidgets.QDateEdit(self.centralwidget)
+        self.edtData.setGeometry(QtCore.QRect(80, 40, 110, 22))
+        self.edtData.setDateTime(QtCore.QDateTime(QtCore.QDate(2022, 6, 4), QtCore.QTime(0, 0, 0)))
+        self.edtData.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(2022, 5, 30), QtCore.QTime(0, 0, 0)))
+        self.edtData.setMinimumDate(QtCore.QDate(2022, 5, 30))
+        self.edtData.setObjectName("edtData")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 541, 21))
@@ -90,16 +94,17 @@ class Ui_MainWindow(object):
     def consultar(self):
         dados = self.pedidoController.consultar(int(self.edtId.text()))
         if dados:
-            self.edtData.setText(dados[1])
+            ano, mes, dia = dados[1].split('-')
+            self.edtData.setDateTime(QtCore.QDateTime(QtCore.QDate(int(ano), int(mes), int(dia)), QtCore.QTime(0, 0, 0)))
             self.edtQuantidade.setText(dados[2])
             self.edtValorTotal.setText(dados[3])
             self.edtProduto.setText(dados[4])
             self.edtCliente.setText(dados[5])
-            self.btnCadastrar.setEnabled(False)
-            self.btnAtualizar.setEnabled(True)
             print("Consultado valores!")
         else:
-            self.edtData.setText('')
+            diaAtual = str(datetime.date.today())
+            ano, mes, dia = diaAtual.split('-')
+            self.edtData.setDateTime(QtCore.QDateTime(QtCore.QDate(int(ano), int(mes), int(dia)), QtCore.QTime(0, 0, 0)))
             self.edtQuantidade.setText('')
             self.edtValorTotal.setText('')
             self.edtProduto.setText('')
@@ -108,14 +113,17 @@ class Ui_MainWindow(object):
 
     def cadastrar(self):
         if self.pedidoController.cadastrar(int(self.edtId.text()),
-                                           self.edtData.text(),
+                                           self.edtData.date().toPyDate(),
                                            int(self.edtQuantidade.text()),
                                            float(self.edtValorTotal.text()),
                                            int(self.edtProduto.text()),
                                            int(self.edtCliente.text())):
+            diaAtual = str(datetime.date.today())
+            ano, mes, dia = diaAtual.split('-')
             print('Pedido cadastrado!')
+
             self.edtId.setText('')
-            self.edtData.setText('')
+            self.edtData.setDateTime(QtCore.QDateTime(QtCore.QDate(int(ano), int(mes), int(dia)), QtCore.QTime(0, 0, 0)))
             self.edtQuantidade.setText('')
             self.edtValorTotal.setText('')
             self.edtProduto.setText('')
@@ -127,31 +135,32 @@ class Ui_MainWindow(object):
 
     def atualizar(self):
         if self.pedidoController.atualizar(str(self.edtId.text()),
-                                           self.edtData.text(),
+                                           self.edtData.date().toPyDate(),
                                            str(self.edtQuantidade.text()),
                                            str(self.edtValorTotal.text())):
             print('Pedido atualizado!')
-
+            diaAtual = str(datetime.date.today())
+            ano, mes, dia = diaAtual.split('-')
             self.edtId.setText('')
-            self.edtData.setText('')
+            self.edtData.setDateTime(QtCore.QDateTime(QtCore.QDate(int(ano), int(mes), int(dia)), QtCore.QTime(0, 0, 0)))
             self.edtQuantidade.setText('')
             self.edtValorTotal.setText('')
             self.edtProduto.setText('')
             self.edtCliente.setText('')
-            self.btnCadastrar.setEnabled(True)
         else:
             print('Erro ao atualizar Pedido!')
 
     def excluir(self):
         if self.pedidoController.excluir(self.edtId.text()):
             print('Cliente excluído!')
+            diaAtual = str(datetime.date.today())
+            ano, mes, dia = diaAtual.split('-')
             self.edtId.setText('')
-            self.edtData.setText('')
+            self.edtData.setDateTime(QtCore.QDateTime(QtCore.QDate(int(ano), int(mes), int(dia)), QtCore.QTime(0, 0, 0)))
             self.edtQuantidade.setText('')
             self.edtValorTotal.setText('')
             self.edtProduto.setText('')
             self.edtCliente.setText('')
-            self.btnCadastrar.setEnabled(True)
         else:
             print('Erro ao excluir Pedido!')
 

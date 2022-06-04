@@ -87,8 +87,6 @@ class Ui_MainWindow(object):
             self.edtEndereco.setText(dados[2])
             self.edtCpf.setText(dados[3])
             self.edtTelefone.setText(dados[4])
-            self.btnCadastrar.setEnabled(False)
-            self.btnAtualizar.setEnabled(True)
             print("Consultado valores!")
         else:
             self.edtNome.setText('')
@@ -127,7 +125,6 @@ class Ui_MainWindow(object):
             self.edtEndereco.setText('')
             self.edtCpf.setText('')
             self.edtTelefone.setText('')
-            self.btnCadastrar.setEnabled(True)
         else:
             print('Erro ao atualizar Cliente!')
 
@@ -139,7 +136,6 @@ class Ui_MainWindow(object):
             self.edtEndereco.setText('')
             self.edtCpf.setText('')
             self.edtTelefone.setText('')
-            self.btnCadastrar.setEnabled(True)
         else:
             print('Erro ao excluir Cliente!')
 
