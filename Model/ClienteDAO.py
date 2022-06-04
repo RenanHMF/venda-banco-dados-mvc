@@ -31,13 +31,13 @@ class ClienteDao:
             return True
         return False
 
-    def consultar(self, id):
-        sql = 'SELECT * FROM CLIENTE WHERE ID =' + str(id)
+    def consultar(self, id_cliente):
+        sql = 'SELECT * FROM CLIENTE WHERE ID_CLIENTE = ' + str(id_cliente)
         if not self.conectar():
             return False
         self.cursor.execute(sql)
-        for (id, nome, endereco, telefone, cpf) in self.cursor:
-            c = Cliente(id, nome, endereco, telefone, cpf)
+        for (id_cliente, nome, endereco, telefone, cpf) in self.cursor:
+            c = Cliente(id_cliente, nome, endereco, telefone, cpf)
             return c
         return None
 
