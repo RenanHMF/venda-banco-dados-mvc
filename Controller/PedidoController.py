@@ -2,7 +2,7 @@ from Model.Pedido import Pedido
 from Model.PedidoDAO import PedidoDAO
 
 class PedidoController:
-    def __int__(self):
+    def __init__(self):
         self.pDAO = PedidoDAO()
         self.pedido = None
 
@@ -17,9 +17,9 @@ class PedidoController:
     def atualizar(self, id, data, quantidade, valorTotal):
         if not self.pedido.getId() == int(id):
             return False
-        self.pedido.setData(int(data))
+        self.pedido.setData(data)
         self.pedido.setQuantidade(int(quantidade))
-        self.pedido.setValorTotal(int(valorTotal))
+        self.pedido.setValorTotal(float(valorTotal))
         return self.pDAO.atualizar(self.pedido)
 
     def consultar(self, id):

@@ -10,55 +10,67 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from Controller.PedidoController import PedidoController
 
 class Ui_MainWindow(object):
+
+    def __init__(self):
+        self.pedidoController = PedidoController()
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(541, 294)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.btnExcluir = QtWidgets.QPushButton(self.centralwidget)
-        self.btnExcluir.setGeometry(QtCore.QRect(250, 170, 75, 23))
+        self.btnExcluir.setGeometry(QtCore.QRect(250, 190, 75, 23))
         self.btnExcluir.setObjectName("btnExcluir")
         self.btnCadastrar = QtWidgets.QPushButton(self.centralwidget)
-        self.btnCadastrar.setGeometry(QtCore.QRect(90, 170, 75, 23))
+        self.btnCadastrar.setGeometry(QtCore.QRect(90, 190, 75, 23))
         self.btnCadastrar.setObjectName("btnCadastrar")
         self.btnConsultar = QtWidgets.QPushButton(self.centralwidget)
-        self.btnConsultar.setGeometry(QtCore.QRect(10, 170, 75, 23))
+        self.btnConsultar.setGeometry(QtCore.QRect(10, 190, 75, 23))
         self.btnConsultar.setObjectName("btnConsultar")
-        self.edtEndereco = QtWidgets.QLineEdit(self.centralwidget)
-        self.edtEndereco.setGeometry(QtCore.QRect(60, 70, 381, 21))
-        self.edtEndereco.setObjectName("edtEndereco")
+        self.edtQuantidade = QtWidgets.QLineEdit(self.centralwidget)
+        self.edtQuantidade.setGeometry(QtCore.QRect(80, 70, 381, 21))
+        self.edtQuantidade.setObjectName("edtQuantidade")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(10, 100, 47, 13))
+        self.label_4.setGeometry(QtCore.QRect(10, 100, 51, 16))
         self.label_4.setObjectName("label_4")
-        self.edtCpf = QtWidgets.QLineEdit(self.centralwidget)
-        self.edtCpf.setGeometry(QtCore.QRect(60, 100, 171, 20))
-        self.edtCpf.setObjectName("edtCpf")
+        self.edtValorTotal = QtWidgets.QLineEdit(self.centralwidget)
+        self.edtValorTotal.setGeometry(QtCore.QRect(80, 100, 171, 20))
+        self.edtValorTotal.setObjectName("edtValorTotal")
         self.btnAtualizar = QtWidgets.QPushButton(self.centralwidget)
-        self.btnAtualizar.setGeometry(QtCore.QRect(170, 170, 75, 23))
+        self.btnAtualizar.setGeometry(QtCore.QRect(170, 190, 75, 23))
         self.btnAtualizar.setObjectName("btnAtualizar")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(10, 10, 47, 13))
         self.label.setObjectName("label")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(10, 70, 47, 13))
+        self.label_3.setGeometry(QtCore.QRect(10, 70, 61, 16))
         self.label_3.setObjectName("label_3")
-        self.edtNome = QtWidgets.QLineEdit(self.centralwidget)
-        self.edtNome.setGeometry(QtCore.QRect(60, 40, 381, 20))
-        self.edtNome.setObjectName("edtNome")
+        self.edtData = QtWidgets.QLineEdit(self.centralwidget)
+        self.edtData.setGeometry(QtCore.QRect(80, 40, 381, 20))
+        self.edtData.setObjectName("edtData")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(10, 40, 47, 13))
         self.label_2.setObjectName("label_2")
         self.edtId = QtWidgets.QLineEdit(self.centralwidget)
-        self.edtId.setGeometry(QtCore.QRect(60, 10, 111, 20))
+        self.edtId.setGeometry(QtCore.QRect(80, 10, 111, 20))
         self.edtId.setObjectName("edtId")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(10, 130, 47, 13))
         self.label_5.setObjectName("label_5")
-        self.edtTelefone = QtWidgets.QLineEdit(self.centralwidget)
-        self.edtTelefone.setGeometry(QtCore.QRect(60, 130, 171, 20))
-        self.edtTelefone.setObjectName("edtTelefone")
+        self.edtProduto = QtWidgets.QLineEdit(self.centralwidget)
+        self.edtProduto.setGeometry(QtCore.QRect(80, 130, 171, 20))
+        self.edtProduto.setObjectName("edtProduto")
+        self.edtCliente = QtWidgets.QLineEdit(self.centralwidget)
+        self.edtCliente.setGeometry(QtCore.QRect(80, 160, 171, 20))
+        self.edtCliente.setText("")
+        self.edtCliente.setObjectName("edtCliente")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(10, 160, 47, 13))
+        self.label_6.setObjectName("label_6")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 541, 21))
@@ -70,6 +82,78 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.btnConsultar.clicked.connect(self.consultar)
+        self.btnCadastrar.clicked.connect(self.cadastrar)
+        self.btnAtualizar.clicked.connect(self.atualizar)
+        self.btnExcluir.clicked.connect(self.excluir)
+
+    def consultar(self):
+        dados = self.pedidoController.consultar(int(self.edtId.text()))
+        if dados:
+            self.edtData.setText(dados[1])
+            self.edtQuantidade.setText(dados[2])
+            self.edtValorTotal.setText(dados[3])
+            self.edtProduto.setText(dados[4])
+            self.edtCliente.setText(dados[5])
+            self.btnCadastrar.setEnabled(False)
+            self.btnAtualizar.setEnabled(True)
+            print("Consultado valores!")
+        else:
+            self.edtData.setText('')
+            self.edtQuantidade.setText('')
+            self.edtValorTotal.setText('')
+            self.edtProduto.setText('')
+            self.edtCliente.setText('')
+            print("Não foi possivel consultar Pedido!")
+
+    def cadastrar(self):
+        if self.pedidoController.cadastrar(int(self.edtId.text()),
+                                           self.edtData.text(),
+                                           int(self.edtQuantidade.text()),
+                                           float(self.edtValorTotal.text()),
+                                           int(self.edtProduto.text()),
+                                           int(self.edtCliente.text())):
+            print('Pedido cadastrado!')
+            self.edtId.setText('')
+            self.edtData.setText('')
+            self.edtQuantidade.setText('')
+            self.edtValorTotal.setText('')
+            self.edtProduto.setText('')
+            self.edtCliente.setText('')
+
+        else:
+            self.edtId.setText('')
+            print('Erro ao cadastrar Pedido!')
+
+    def atualizar(self):
+        if self.pedidoController.atualizar(str(self.edtId.text()),
+                                           self.edtData.text(),
+                                           str(self.edtQuantidade.text()),
+                                           str(self.edtValorTotal.text())):
+            print('Pedido atualizado!')
+
+            self.edtId.setText('')
+            self.edtData.setText('')
+            self.edtQuantidade.setText('')
+            self.edtValorTotal.setText('')
+            self.edtProduto.setText('')
+            self.edtCliente.setText('')
+            self.btnCadastrar.setEnabled(True)
+        else:
+            print('Erro ao atualizar Pedido!')
+
+    def excluir(self):
+        if self.pedidoController.excluir(self.edtId.text()):
+            print('Cliente excluído!')
+            self.edtId.setText('')
+            self.edtData.setText('')
+            self.edtQuantidade.setText('')
+            self.edtValorTotal.setText('')
+            self.edtProduto.setText('')
+            self.edtCliente.setText('')
+            self.btnCadastrar.setEnabled(True)
+        else:
+            print('Erro ao excluir Pedido!')
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -77,12 +161,13 @@ class Ui_MainWindow(object):
         self.btnExcluir.setText(_translate("MainWindow", "Excluir"))
         self.btnCadastrar.setText(_translate("MainWindow", "Cadastrar"))
         self.btnConsultar.setText(_translate("MainWindow", "Consultar"))
-        self.label_4.setText(_translate("MainWindow", "CPF"))
+        self.label_4.setText(_translate("MainWindow", "Valor Total"))
         self.btnAtualizar.setText(_translate("MainWindow", "Atualizar"))
         self.label.setText(_translate("MainWindow", "Código"))
-        self.label_3.setText(_translate("MainWindow", "Endereço"))
-        self.label_2.setText(_translate("MainWindow", "Nome"))
-        self.label_5.setText(_translate("MainWindow", "Telefone"))
+        self.label_3.setText(_translate("MainWindow", "Quantidade"))
+        self.label_2.setText(_translate("MainWindow", "Data"))
+        self.label_5.setText(_translate("MainWindow", "Produto"))
+        self.label_6.setText(_translate("MainWindow", "Cliente"))
 
 
 if __name__ == "__main__":

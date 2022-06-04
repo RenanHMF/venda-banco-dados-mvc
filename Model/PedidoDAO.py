@@ -33,7 +33,7 @@ class PedidoDAO:
         return False
 
     def consultar(self, id):
-        sql = 'SELECT * FROM PEDIDO WHERE ID =' + str(id)
+        sql = 'SELECT * FROM PEDIDO WHERE ID_PEDIDO =' + str(id)
         if not self.conectar():
             return False
         self.cursor.execute(sql)
@@ -43,8 +43,8 @@ class PedidoDAO:
         return None
 
     def atualizar(self, p):
-        sql = 'UPDATE PEDIDO SET DATA=%s, QUANTIDADE=%s, VALORTOTAL=%s'
-        valores = (p.getData(), p.getQuantidade(), p.getValorTotal())
+        sql = 'UPDATE PEDIDO SET DATA=%s, QUANTIDADE=%s, VALORTOTAL=%s WHERE ID_PEDIDO=%s'
+        valores = (p.getData(), p.getQuantidade(), p.getValorTotal(), p.getId())
         if not self.conectar():
             return False
         self.cursor.execute(sql, valores)
@@ -54,7 +54,7 @@ class PedidoDAO:
         return False
 
     def excluir(self, id):
-        sql = 'DELETE FROM PEDIDO WHERE ID =' + str(id)
+        sql = 'DELETE FROM PEDIDO WHERE ID_PEDIDO =' + str(id)
         if not self.conectar():
             return False
         self.cursor.execute(sql)
